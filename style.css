@@ -1,0 +1,19 @@
+body {
+  background-color: rgb(221, 220, 229);
+  margin: 0;
+}
+
+canvas{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100 vw;
+  height: 100vh;
+}
+
+h1 {
+  font-family: 'PP Editorial New';
+  font-weight: 300;
+  color: blue;
+}
+
