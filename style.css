@@ -11,7 +11,7 @@ canvas{
   height: 100vh;
 }
 
-header {
+h1 {
   font-family: 'PP Editorial New';
   font-weight: 300;
   color: blue;
