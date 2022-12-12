@@ -74,10 +74,11 @@ function animate() {
   controls.update();
 
   // cube.rotation.x += 0.01;
-  objectGroup.rotation.y += 0.001;
+  objectGroup.rotation.y += 0.0007;
 
   renderer.render(scene, camera);
 }
+
 animate();
 
 

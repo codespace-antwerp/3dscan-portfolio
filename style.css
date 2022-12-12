@@ -17,3 +17,21 @@ h1 {
   color: blue;
 }
 
+header{
+  display: grid;
+  grid-template-columns: 50vw 50vw;
+}
+
+.Arthur{
+  grid-column: 1/2;
+}
+
+.About{
+  grid-column: 2/2;
+}
+
+button{
+  text-align: left;
+  border: none;
+  background-color:rgb(221, 220, 229);
+}
