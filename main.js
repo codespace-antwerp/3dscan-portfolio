@@ -84,6 +84,7 @@ function render() {
 
 	}
 }
+window.addEventListener( 'pointermove', onPointerMove );
 
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
 scene.add(ambientLight);
