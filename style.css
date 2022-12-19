@@ -19,6 +19,8 @@ canvas{
 h1 {
   font-family:'PPEditorialNew-Thin';
   color: blue;
+  font-size: 2rem;
+  padding-top: 1rem;
 }
 
 header{
@@ -28,6 +30,7 @@ header{
 
 .Arthur{
   grid-column: 1/2;
+  padding-left: 2rem;
 }
 
 .About{
