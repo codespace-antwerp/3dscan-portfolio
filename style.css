@@ -1,3 +1,8 @@
+@font-face {
+  font-family: 'PPEditorialNew-Thin';
+  src: url(Editorial_New_kopie/PPEditorialNew-Thin.ttf);
+}
+
 body {
   background-color: rgb(221, 220, 229);
   margin: 0;
@@ -12,8 +17,7 @@ canvas{
 }
 
 h1 {
-  font-family: 'PP Editorial New';
-  font-weight: 300;
+  font-family:'PPEditorialNew-Thin';
   color: blue;
 }
 

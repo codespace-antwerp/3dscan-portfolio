@@ -83,8 +83,14 @@ function render() {
 		intersects[ i ].object.material.color.set( 0xff0000 );
 
 	}
+
+	renderer.render( scene, camera );
+
 }
+
 window.addEventListener( 'pointermove', onPointerMove );
+
+window.requestAnimationFrame(render);
 
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
 scene.add(ambientLight);
