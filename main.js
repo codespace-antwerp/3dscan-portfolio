@@ -18,6 +18,17 @@ document.body.appendChild(renderer.domElement);
 
 const controls = new OrbitControls(camera, renderer.domElement);
 
+const OBJECT_DATABASE = {
+  Erangel_poster: {
+    image: "images/Erangel_poster.jpg",
+    text: "Erangel blah",
+  },
+  Metropolis: {
+    image: "images/Metropolis.jpg",
+    text: "Metropolis blah",
+  },
+};
+
 // const geometry = new THREE.BoxGeometry(1, 1, 1);
 // const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
 // const cube = new THREE.Mesh(geometry, material);
@@ -73,7 +84,14 @@ function onPointerMove(event) {
 function onPointerDown(event) {
   if (activeObject) {
     console.log(activeObject.name);
-    // activeObject.scale.set(5, 5, 5);
+    // Look up the data for the object
+    const data = OBJECT_DATABASE[activeObject.name];
+    // Change the image src
+    document.querySelector(".popup-image").src = data.image;
+    // Change the text
+    document.querySelector(".popup-text").innerHTML = data.text;
+    // Show the popup
+    document.querySelector(".popup-wrapper").classList.add("visible");
   }
 }
 
@@ -123,3 +141,7 @@ function animate() {
 }
 
 animate();
+
+document.querySelector(".popup-close").addEventListener("click", () => {
+  document.querySelector(".popup-wrapper").classList.remove("visible");
+});
