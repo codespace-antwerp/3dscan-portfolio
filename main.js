@@ -70,6 +70,7 @@ loader.load("models/Transversal.glb", function (gltf) {
 
 const raycaster = new THREE.Raycaster();
 const pointer = new THREE.Vector2(99999, 99999);
+let popupVisible = false;
 
 function onPointerMove(event) {
   // calculate pointer position in normalized device coordinates
@@ -92,6 +93,7 @@ function onPointerDown(event) {
     document.querySelector(".popup-text").innerHTML = data.text;
     // Show the popup
     document.querySelector(".popup-wrapper").classList.add("visible");
+    popupVisible = true;
   }
 }
 
@@ -128,10 +130,12 @@ function animate() {
 
   // calculate objects intersecting the picking ray
   activeObject = null;
-  const intersects = raycaster.intersectObjects(objectGroup.children);
-  if (intersects.length > 0) {
-    intersects[0].object.material.color.set(0xff00ff);
-    activeObject = intersects[0].object;
+  if (!popupVisible) {
+    const intersects = raycaster.intersectObjects(objectGroup.children);
+    if (intersects.length > 0) {
+      intersects[0].object.material.color.set(0xff00ff);
+      activeObject = intersects[0].object;
+    }
   }
 
   // cube.rotation.x += 0.01;
@@ -144,4 +148,5 @@ animate();
 
 document.querySelector(".popup-close").addEventListener("click", () => {
   document.querySelector(".popup-wrapper").classList.remove("visible");
+  popupVisible = false;
 });
