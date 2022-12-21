@@ -1,5 +1,6 @@
 import "./style.css";
 import * as THREE from "three";
+import gsap from "gsap";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
@@ -83,8 +84,11 @@ function onPointerMove(event) {
 }
 
 function onPointerDown(event) {
-  if (activeObject) {
+  if (activeObject && !popupVisible) {
     console.log(activeObject.name);
+    // Animate object scale
+    gsap.to(activeObject.scale, { x: 3.0, y: 3.0, z: 3.0 });
+
     // Look up the data for the object
     const data = OBJECT_DATABASE[activeObject.name];
     // Change the image src
@@ -129,8 +133,8 @@ function animate() {
   });
 
   // calculate objects intersecting the picking ray
-  activeObject = null;
   if (!popupVisible) {
+    activeObject = null;
     const intersects = raycaster.intersectObjects(objectGroup.children);
     if (intersects.length > 0) {
       intersects[0].object.material.color.set(0xff00ff);
@@ -149,4 +153,6 @@ animate();
 document.querySelector(".popup-close").addEventListener("click", () => {
   document.querySelector(".popup-wrapper").classList.remove("visible");
   popupVisible = false;
+  // Animate object scale
+  gsap.to(activeObject.scale, { x: 1.0, y: 1.0, z: 1.0 });
 });
