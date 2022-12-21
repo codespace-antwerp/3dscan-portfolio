@@ -58,7 +58,7 @@ loader.load("models/Transversal.glb", function (gltf) {
 });
 
 const raycaster = new THREE.Raycaster();
-const pointer = new THREE.Vector2();
+const pointer = new THREE.Vector2(99999,99999);
 
 function onPointerMove( event ) {
 
@@ -68,29 +68,13 @@ function onPointerMove( event ) {
 	pointer.x = ( event.clientX / window.innerWidth ) * 2 - 1;
 	pointer.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
 
+  // console.log(pointer);
+  
 }
 
-function render() {
-
-	// update the picking ray with the camera and pointer position
-	raycaster.setFromCamera( pointer, camera );
-
-	// calculate objects intersecting the picking ray
-	const intersects = raycaster.intersectObjects( scene.children );
-
-	for ( let i = 0; i < intersects.length; i ++ ) {
-
-		intersects[ i ].object.material.color.set( 0xff0000 );
-
-	}
-
-	renderer.render( scene, camera );
-
-}
 
 window.addEventListener( 'pointermove', onPointerMove );
 
-window.requestAnimationFrame(render);
 
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
 scene.add(ambientLight);
@@ -107,6 +91,17 @@ controls.maxDistance = 8
 function animate() {
   requestAnimationFrame(animate);
   controls.update();
+
+  	// update the picking ray with the camera and pointer position
+	raycaster.setFromCamera( pointer, camera );
+
+	// calculate objects intersecting the picking ray
+	const intersects = raycaster.intersectObjects( scene.children );
+
+	for ( let i = 0; i < intersects.length; i ++ ) {
+    console.log(intersects[ i ].object)
+		intersects[ i ].object.material.color.set( 0xff0000 );
+	}
 
   // cube.rotation.x += 0.01;
   objectGroup.rotation.y += 0.0007;
