@@ -36,6 +36,7 @@ header {
 #about-button {
   position: relative;
   z-index: 10;
+  cursor: pointer;
 }
 
 button {
