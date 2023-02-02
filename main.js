@@ -30,6 +30,7 @@ const OBJECT_DATABASE = {
   },
   Chain: {
     image: "images/Erangel.jpg",
+    // video: "videos/cat.mp4",
     text: "Visual identity for the fictional island Erangel. (Poster and id-card concept) (2021)",
   },
   MHdr_poster: {
@@ -124,8 +125,17 @@ function onPointerDown(event) {
     gsap.to(activeObject.scale, { x: 2.0, y: 2.0, z: 2.0 });
     // Look up the data for the object
     const data = OBJECT_DATABASE[activeObject.name];
-    // Change the image src
-    document.querySelector(".popup-image").src = data.image;
+    if (data.image) {
+      // Change the image src
+      document.querySelector(".popup-image").src = data.image;
+      document.querySelector(".popup-image").style.display = "block";
+      document.querySelector(".popup-video").style.display = "none";
+    } else if (data.video) {
+      // This is a video
+      document.querySelector(".popup-video").src = data.video;
+      document.querySelector(".popup-video").style.display = "block";
+      document.querySelector(".popup-image").style.display = "none";
+    }
     // Change the text
     document.querySelector(".popup-text").innerHTML = data.text;
     // Show the popup

@@ -91,7 +91,8 @@ button {
   justify-content: flex-start;
 }
 
-.popup-image {
+.popup-image,
+.popup-video {
   flex: 1;
   overflow: hidden;
   width: 100%;
