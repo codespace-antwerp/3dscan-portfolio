@@ -28,34 +28,34 @@ const OBJECT_DATABASE = {
     image: "images/MetropolisM.jpg",
     text: "Metropolis M issue 6 redesign. (2022)",
   },
-  Chain:{
+  Chain: {
     image: "images/Erangel.jpg",
     text: "Visual identity for the fictional island Erangel. (Poster and id-card concept) (2021)",
   },
-  MHdr_poster:{
+  MHdr_poster: {
     image: "images/MHdr_poster.jpg",
     text: "Film poster for Mulholland Drive, by David Lynch. (2022)",
   },
-  PHP:{
+  PHP: {
     image: "images/PHP.jpg",
     text: "Drawing system made of paper. (2022)",
   },
-  Transversal:{
+  Transversal: {
     image: "images/Transversal.jpg",
     text: "Transversal display font, made with diagonals at an angle of 87°. (2021)",
   },
-  tape:{
+  tape: {
     image: "images/tape.jpg",
     text: "Tape gadget against pedants. (2021) ",
   },
-  printsheet:{
+  printsheet: {
     image: "images/printsheet.jpg",
     text: "Printsheet for printer testing. (2021)",
   },
-  Chapter_3:{
+  Chapter_3: {
     image: "Chapter3.gif",
-    text: "Publication of my project -Chapter 3- A third chapter to A.Abbot's Flatland, a new perspective on reality."
-  }
+    text: "Publication of my project -Chapter 3- A third chapter to A.Abbot's Flatland, a new perspective on reality.",
+  },
 };
 
 // const geometry = new THREE.BoxGeometry(1, 1, 1);
@@ -164,7 +164,7 @@ function animate() {
     if (child.isMesh) {
       child.material.color.set(0xffffff);
       child.material.transparent = false;
-      child.material. opacity = 1;
+      child.material.opacity = 1;
     }
   });
 
@@ -188,9 +188,21 @@ function animate() {
 
 animate();
 
-document.querySelector(".popup-close").addEventListener("click", () => {
-  document.querySelector(".popup-wrapper").classList.remove("visible");
-  popupVisible = false;
-  // Animate object scale
-  gsap.to(activeObject.scale, { x: 1.0, y: 1.0, z: 1.0 });
+document.querySelectorAll(".popup-close").forEach((popup) =>
+  popup.addEventListener("click", () => {
+    document
+      .querySelectorAll(".popup-wrapper")
+      .forEach((wrapper) => wrapper.classList.remove("visible"));
+    popupVisible = false;
+    // Animate object scale
+    if (activeObject) {
+      gsap.to(activeObject.scale, { x: 1.0, y: 1.0, z: 1.0 });
+    }
+  })
+);
+
+document.querySelector("#about-button").addEventListener("click", () => {
+  // Show the popup
+  document.querySelector("#about-popup-wrapper").classList.add("visible");
+  popupVisible = true;
 });

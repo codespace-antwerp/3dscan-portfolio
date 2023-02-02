@@ -33,8 +33,9 @@ header {
   padding-left: 2rem;
 }
 
-.About {
-  grid-column: 2/2;
+#about-button {
+  position: relative;
+  z-index: 10;
 }
 
 button {
@@ -54,7 +55,7 @@ button {
   z-index: 9999;
   justify-content: center;
   align-items: center;
-  animation: fade-in .7s;
+  animation: fade-in 0.7s;
 }
 
 @keyframes fade-in {
@@ -74,7 +75,7 @@ button {
 }
 
 .popup {
-  width: max(800px,60vw);
+  width: max(800px, 60vw);
   height: 80vh;
   background-color: white;
   border-radius: 10px;
@@ -86,6 +87,10 @@ button {
   gap: 0.5rem;
 }
 
+.popup#about-popup {
+  justify-content: flex-start;
+}
+
 .popup-image {
   flex: 1;
   overflow: hidden;
@@ -93,7 +98,7 @@ button {
   height: 100%;
   object-fit: contain;
 }
- /*
+/*
   .popup-image2 {
     flex: 1;
     overflow: hidden;
@@ -117,18 +122,14 @@ button {
   } 
   */
 
-.popup-text{
+.popup-text {
   font-family: "PPEditorialNew-Thin";
   color: blue;
   font-size: 1.2rem;
 }
 
-.popup-close{
+.popup-close {
   font-family: "PPEditorialNew-Thin";
   color: blue;
   font-size: 1.2rem;
-}
-
-.About-popup{
-  visibility: hidden;
 }

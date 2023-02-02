@@ -10,10 +10,12 @@
 
 <body>
   <header>
-     <h1 class="Arthur">Arthur Saint-Remy</h1>
-    
-     <button type="About" class="btn" onclick="openPopup()"><h1>About</h1></button>
-   <!-- <a href="About.html">
+    <h1 class="Arthur">Arthur Saint-Remy</h1>
+
+    <button type="About" id="about-button" class="btn">
+      <h1>About</h1>
+    </button>
+    <!-- <a href="About.html">
         <h1 class="About">About</h1>
     </a> -->
 
@@ -23,22 +25,28 @@
     <div class="popup">
       <div class="popup-close">CLOSE</div>
       <img class="popup-image" src="https://source.unsplash.com/600x800">
-     <!-- <img class="popup-image2" src="https://source.unsplash.com/600x800">
+      <!-- <img class="popup-image2" src="https://source.unsplash.com/600x800">
       <img class="popup-image3" src="https://source.unsplash.com/600x800">
       <img class="popup-image4" src="https://source.unsplash.com/600x800"> -->
-      <div class="popup-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quas, a neque obcaecati quam at nisi voluptatum impedit veniam aliquid facilis nobis consequuntur aperiam, iusto atque autem corporis!</div>
+      <div class="popup-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quas, a neque obcaecati quam at
+        nisi voluptatum impedit veniam aliquid facilis nobis consequuntur aperiam, iusto atque autem corporis!</div>
     </div>
   </div>
 
-  <div class="popup" id="About-popup">
-    <div class="popup-text">
-      <h1>About</h1>
-      <p>Arthur Saint-Remy is a graphic design student at Sint-Lucas Antwerpen. This website features student assignments, personal projects and commission work. </p>
-      <p>Contact</p>
-      <p>arthur@saintremy.be</p>
-  
-      <a href="https://www.instagram.com/arthur_saintremy/"><p>@arthur_saintremy</p></a>
-      <div class="popup-close" type="btn" onclick="closePopup">CLOSE</div>
+  <div class="popup-wrapper" id="about-popup-wrapper">
+    <div class="popup" id="about-popup">
+      <div class="popup-close" type="btn">CLOSE</div>
+      <div class="popup-text">
+        <h1>About</h1>
+        <p>Arthur Saint-Remy is a graphic design student at Sint-Lucas Antwerpen. This website features student
+          assignments, personal projects and commission work. </p>
+        <p>Contact</p>
+        <p>arthur@saintremy.be</p>
+
+        <a href="https://www.instagram.com/arthur_saintremy/">
+          <p>@arthur_saintremy</p>
+        </a>
+      </div>
     </div>
   </div>
 
@@ -46,7 +54,7 @@
 
   <script id="canvas" type="module" src="/main.js"></script>
 
- <!-- <script>
+  <!-- <script>
     let popup = document.getElementById("About-popup")
 
     function openPopup
