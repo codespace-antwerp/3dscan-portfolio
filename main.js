@@ -1,5 +1,6 @@
 import "./style.css";
 import * as THREE from "three";
+import gsap from "gsap";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
@@ -17,6 +18,17 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
 const controls = new OrbitControls(camera, renderer.domElement);
+
+const OBJECT_DATABASE = {
+  Erangel_poster: {
+    image: "images/Erangel_poster.jpg",
+    text: "Erangel blah",
+  },
+  Metropolis: {
+    image: "images/Metropolis.jpg",
+    text: "Metropolis blah",
+  },
+};
 
 // const geometry = new THREE.BoxGeometry(1, 1, 1);
 // const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
@@ -58,23 +70,39 @@ loader.load("models/Transversal.glb", function (gltf) {
 });
 
 const raycaster = new THREE.Raycaster();
-const pointer = new THREE.Vector2(99999,99999);
+const pointer = new THREE.Vector2(99999, 99999);
+let popupVisible = false;
 
-function onPointerMove( event ) {
+function onPointerMove(event) {
+  // calculate pointer position in normalized device coordinates
+  // (-1 to +1) for both components
 
-	// calculate pointer position in normalized device coordinates
-	// (-1 to +1) for both components
-
-	pointer.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-	pointer.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+  pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
+  pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
   // console.log(pointer);
-  
 }
 
+function onPointerDown(event) {
+  if (activeObject && !popupVisible) {
+    console.log(activeObject.name);
+    // Animate object scale
+    gsap.to(activeObject.scale, { x: 3.0, y: 3.0, z: 3.0 });
 
-window.addEventListener( 'pointermove', onPointerMove );
+    // Look up the data for the object
+    const data = OBJECT_DATABASE[activeObject.name];
+    // Change the image src
+    document.querySelector(".popup-image").src = data.image;
+    // Change the text
+    document.querySelector(".popup-text").innerHTML = data.text;
+    // Show the popup
+    document.querySelector(".popup-wrapper").classList.add("visible");
+    popupVisible = true;
+  }
+}
 
+window.addEventListener("pointermove", onPointerMove);
+window.addEventListener("pointerdown", onPointerDown);
 
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
 scene.add(ambientLight);
@@ -83,27 +111,40 @@ const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
 directionalLight.position.set(0, 0.2, 1);
 scene.add(directionalLight);
 
-camera.position.z = 5;
+let activeObject = null;
 
-controls.minDistance = 1.7
-controls.maxDistance = 8
+camera.position.z = 2;
+
+controls.minDistance = 1.7;
+controls.maxDistance = 8;
 
 function animate() {
   requestAnimationFrame(animate);
   controls.update();
 
-  	// update the picking ray with the camera and pointer position
-	raycaster.setFromCamera( pointer, camera );
+  // update the picking ray with the camera and pointer position
+  raycaster.setFromCamera(pointer, camera);
 
-	// calculate objects intersecting the picking ray
-	const intersects = raycaster.intersectObjects( scene.children );
+  // Remove color from all objects
+  objectGroup.traverse((child) => {
+    if (child.isMesh) {
+      child.material.color.set(0xffffff);
+    }
+  });
 
-	for ( let i = 0; i < intersects.length; i ++ ) {
-    console.log(intersects[ i ].object)
-		//intersects[ i ].object.material.color.set( 0xff0000 );
-    intersects[ i ].object.material.transparent = true;
-    intersects[ i ].object.material.opacity = 0.7;
-	}
+
+  // calculate objects intersecting the picking ray
+  if (!popupVisible) {
+    activeObject = null;
+    const intersects = raycaster.intersectObjects(objectGroup.children);
+    if (intersects.length > 0) {
+      // intersects[0].object.material.color.set(0xff00ff);
+      intersects[0].object.material.transparent = true;
+      intersects[0].object.material.opacity = 0.7;
+  
+      activeObject = intersects[0].object;
+    }
+  }
 
   // cube.rotation.x += 0.01;
   objectGroup.rotation.y += 0.0007;
@@ -113,6 +154,9 @@ function animate() {
 
 animate();
 
-
-
-
+document.querySelector(".popup-close").addEventListener("click", () => {
+  document.querySelector(".popup-wrapper").classList.remove("visible");
+  popupVisible = false;
+  // Animate object scale
+  gsap.to(activeObject.scale, { x: 1.0, y: 1.0, z: 1.0 });
+});
