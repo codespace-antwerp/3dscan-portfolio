@@ -21,13 +21,41 @@ const controls = new OrbitControls(camera, renderer.domElement);
 
 const OBJECT_DATABASE = {
   Erangel_poster: {
-    image: "images/Erangel_poster.jpg",
-    text: "Erangel blah",
+    image: "images/Erangel.jpg",
+    text: "Visual identity for the fictional island Erangel. (Poster and id-card concept) (2021)",
   },
   Metropolis: {
-    image: "images/Metropolis.jpg",
-    text: "Metropolis blah",
+    image: "images/MetropolisM.jpg",
+    text: "Metropolis M issue 6 redesign. (2022)",
   },
+  Chain:{
+    image: "images/Erangel.jpg",
+    text: "Visual identity for the fictional island Erangel. (Poster and id-card concept) (2021)",
+  },
+  MHdr_poster:{
+    image: "images/MHdr_poster.jpg",
+    text: "Film poster for Mulholland Drive, by David Lynch. (2022)",
+  },
+  PHP:{
+    image: "images/PHP.jpg",
+    text: "Drawing system made of paper. (2022)",
+  },
+  Transversal:{
+    image: "images/Transversal.jpg",
+    text: "Transversal display font, made with diagonals at an angle of 87°. (2021)",
+  },
+  tape:{
+    image: "images/tape.jpg",
+    text: "Tape gadget against pedants. (2021) ",
+  },
+  printsheet:{
+    image: "images/printsheet.jpg",
+    text: "Printsheet for printer testing. (2021)",
+  },
+  Chapter_3:{
+    image: "Chapter3.gif",
+    text: "Publication of my project -Chapter 3- A third chapter to A.Abbot's Flatland, a new perspective on reality."
+  }
 };
 
 // const geometry = new THREE.BoxGeometry(1, 1, 1);
@@ -42,6 +70,7 @@ const loader = new GLTFLoader();
 loader.load("models/Erangel_poster.glb", function (gltf) {
   objectGroup.add(gltf.scene);
 });
+
 loader.load("models/Metropolis.glb", function (gltf) {
   objectGroup.add(gltf.scene);
 });
@@ -57,6 +86,7 @@ loader.load("models/Chain.glb", function (gltf) {
 loader.load("models/PHP.glb", function (gltf) {
   objectGroup.add(gltf.scene);
 });
+
 loader.load("models/printsheet.glb", function (gltf) {
   objectGroup.add(gltf.scene);
 });
@@ -66,6 +96,10 @@ loader.load("models/tape.glb", function (gltf) {
 });
 
 loader.load("models/Transversal.glb", function (gltf) {
+  objectGroup.add(gltf.scene);
+});
+
+loader.load("models/Chapter_3.glb", function (gltf) {
   objectGroup.add(gltf.scene);
 });
 
@@ -87,7 +121,7 @@ function onPointerDown(event) {
   if (activeObject && !popupVisible) {
     console.log(activeObject.name);
     // Animate object scale
-    gsap.to(activeObject.scale, { x: 3.0, y: 3.0, z: 3.0 });
+    gsap.to(activeObject.scale, { x: 2.0, y: 2.0, z: 2.0 });
 
     // Look up the data for the object
     const data = OBJECT_DATABASE[activeObject.name];
@@ -129,19 +163,19 @@ function animate() {
   objectGroup.traverse((child) => {
     if (child.isMesh) {
       child.material.color.set(0xffffff);
+      child.material.transparent = false;
+      child.material. opacity = 1;
     }
   });
-
 
   // calculate objects intersecting the picking ray
   if (!popupVisible) {
     activeObject = null;
     const intersects = raycaster.intersectObjects(objectGroup.children);
     if (intersects.length > 0) {
-      // intersects[0].object.material.color.set(0xff00ff);
+      //intersects[0].object.material.color.set(0xff00ff);
       intersects[0].object.material.transparent = true;
-      intersects[0].object.material.opacity = 0.7;
-  
+      intersects[0].object.material.opacity = 0.3;
       activeObject = intersects[0].object;
     }
   }
