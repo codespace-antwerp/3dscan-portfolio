@@ -44,11 +44,11 @@ const OBJECT_DATABASE = {
     image: "images/Transversal.jpg",
     text: "Transversal display font, made with diagonals at an angle of 87°. (2021)",
   },
-  tape: {
+  Tape: {
     image: "images/tape.jpg",
     text: "Tape gadget against pedants. (2021) ",
   },
-  printsheet: {
+  Printsheet: {
     image: "images/printsheet.jpg",
     text: "Printsheet for printer testing. (2021)",
   },
@@ -122,7 +122,6 @@ function onPointerDown(event) {
     console.log(activeObject.name);
     // Animate object scale
     gsap.to(activeObject.scale, { x: 2.0, y: 2.0, z: 2.0 });
-
     // Look up the data for the object
     const data = OBJECT_DATABASE[activeObject.name];
     // Change the image src
