@@ -100,7 +100,9 @@ function animate() {
 
 	for ( let i = 0; i < intersects.length; i ++ ) {
     console.log(intersects[ i ].object)
-		intersects[ i ].object.material.color.set( 0xff0000 );
+		//intersects[ i ].object.material.color.set( 0xff0000 );
+    intersects[ i ].object.material.transparent = true;
+    intersects[ i ].object.material.opacity = 0.7;
 	}
 
   // cube.rotation.x += 0.01;
