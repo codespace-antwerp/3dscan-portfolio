@@ -54,9 +54,9 @@ const OBJECT_DATABASE = {
     text: "Printsheet for printer testing. (2021)",
   },
   Chapter_3: {
-    video: "Chapter3.mp4",
+    video: "video's/Chapter_3.mp4",
     text: "Publication of my project -Chapter 3- A third chapter to A. Abbot's Flatland, a new perspective on reality.",
-  },
+  }
 };
 
 // const geometry = new THREE.BoxGeometry(1, 1, 1);
