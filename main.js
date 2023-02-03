@@ -54,8 +54,8 @@ const OBJECT_DATABASE = {
     text: "Printsheet for printer testing. (2021)",
   },
   Chapter_3: {
-    image: "Chapter3.gif",
-    text: "Publication of my project -Chapter 3- A third chapter to A.Abbot's Flatland, a new perspective on reality.",
+    video: "Chapter3.mp4",
+    text: "Publication of my project -Chapter 3- A third chapter to A. Abbot's Flatland, a new perspective on reality.",
   },
 };
 

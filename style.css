@@ -26,6 +26,7 @@ h1 {
 header {
   display: grid;
   grid-template-columns: 50vw 50vw;
+  background-color: transparent;
 }
 
 .Arthur {
@@ -42,7 +43,7 @@ header {
 button {
   text-align: left;
   border: none;
-  background-color: rgb(212, 211, 218);
+  background-color: transparent;
 }
 
 .popup-wrapper {
